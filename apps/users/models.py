@@ -13,19 +13,43 @@ class UserProfile(AbstractUser):
         ("male", u"男"),
         ("female", u"女")
     )
-    # 昵称
-    nick_name = models.CharField(max_length=50, verbose_name=u"昵称", default="")
-    # 生日，可以为空
-    birthday = models.DateField(verbose_name=u"生日", null=True, blank=True)
+    SCHOOL_CHOICES = (
+        ("cy", u"重庆文化艺术职业学院"),
+        ("outside_school", u"其他学校")
+    )
+    UNIVERSITE_DEPARTMENT_CHOICES = (
+        ("ysjyx", u"艺术教育系"),
+        ("yssjx", u"艺术设计系"),
+        ("whglx", u"文化管理系"),
+        ("yxbyx", u"艺术表演系")
+    )
+    # 真实姓名
+    real_name = models.CharField(max_length=50, verbose_name=u"真实的姓名", default="请输入真实的姓名")
+    # 所属学校
+    school_name = models.CharField(
+        max_length=200, 
+        verbose_name=u"所属学校",
+        choices=SCHOOL_CHOICES,
+        default="cy"
+    )
+    # 所属系部
+    department_name = models.CharField(
+        max_length=50,
+        verbose_name=u"所属系部",
+        choices=UNIVERSITE_DEPARTMENT_CHOICES,
+        default="ysjyx"
+    )
+    # 专业班级
+    class_name = models.CharField(max_length=200, verbose_name=u"专业班级", default='')
     # 性别 只能男或女，默认女
     gender = models.CharField(
         max_length=6,
         verbose_name=u"性别",
         choices=GENDER_CHOICES,
         default="female")
-    # 地址
-    address = models.CharField(max_length=100, verbose_name="地址", default="")
-    # 电话
+    # 学号
+    student_id = models.IntegerField(verbose_name=u"学号", null=True, blank=True)
+    # 电话 
     mobile = models.CharField(
         max_length=11,
         null=True,
